@@ -1,6 +1,6 @@
 from aiogram import Bot, Dispatcher, executor, types
 from decouple import config
-
+from RequestSendler import RequestSendler
 API_TOKEN = config('API_TOKEN')
 
 bot = Bot(token=API_TOKEN)
@@ -11,8 +11,9 @@ async def send_welcome(message: types.Message):
    await message.reply("Привет!\nЯ Бот для проектно-образовательного интенсива \"От идеи к прототипу!\"")
 
 @dp.message_handler() 
-async def echo(message: types.Message): 
-   await message.answer(message.text)
+async def sendMessage(message: types.Message):
+    answer = RequestSendler.SendMessageToServer(message=message.text)
+    await message.answer(answer)
 
 if __name__ == '__main__':
    executor.start_polling(dp, skip_updates=True)

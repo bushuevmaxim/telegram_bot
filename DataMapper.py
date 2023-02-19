@@ -1,3 +1,3 @@
 class DataMapper(object):
-    def getMessage(self,json):
-        return json['message']
+    def getMessage(json):
+        return json["message"]
