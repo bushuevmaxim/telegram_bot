@@ -1,6 +1,8 @@
 from aiogram import Bot, Dispatcher, executor, types
 from decouple import config
 from RequestSendler import RequestSendler
+from aiogram.dispatcher.filters import ChatTypeFilter
+
 API_TOKEN = config('API_TOKEN')
 
 bot = Bot(token=API_TOKEN)
@@ -12,8 +14,18 @@ async def send_welcome(message: types.Message):
 
 @dp.message_handler() 
 async def sendMessage(message: types.Message):
-    answer = RequestSendler.SendMessageToServer(message=message.text)
-    await message.answer(answer)
+    print(message.text)
+    if message.chat.type == 'private':
+
+      answer = RequestSendler.SendMessageToServer(message=message.text)
+      await message.answer(answer)
+
+
+    elif "@PEIntensivBOT" in message.text:
+      answer = RequestSendler.SendMessageToServer(message=message.text)
+      await message.answer(answer)
+       
+    
 
 if __name__ == '__main__':
    executor.start_polling(dp, skip_updates=True)
