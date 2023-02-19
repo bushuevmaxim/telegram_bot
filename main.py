@@ -1,5 +1,4 @@
 from aiogram import Bot, Dispatcher, executor, types
-import os
 from decouple import config
 
 API_TOKEN = config('API_TOKEN')
