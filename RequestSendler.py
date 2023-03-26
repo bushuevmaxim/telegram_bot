@@ -3,9 +3,9 @@ from decouple import config
 from DataMapper import DataMapper
 class RequestSendler(object):
     def SendMessageToServer(message):
-        data = {"botid": config("GUID"), "message": message}
-        postRequest = requests.post(url = config("URL"), data=data)
-        if postRequest.status_code == 201:
+        data = {"bot_guid": config("GUID"), "message": message}
+        postRequest = requests.post(url = config("URL") + "/chat/predict", data=data)
+        if postRequest.status_code == 200:
             jsonResponse = postRequest.json()
             message = DataMapper.getMessage(json=jsonResponse)
             return message
