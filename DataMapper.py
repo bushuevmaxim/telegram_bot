@@ -1,3 +1,3 @@
 class DataMapper(object):
     def getMessage(json):
-        return json["message"]
+        return json["answer"]
