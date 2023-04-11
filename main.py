@@ -15,13 +15,13 @@ async def send_welcome(message: types.Message):
 @dp.message_handler() 
 async def sendMessage(message: types.Message):
     if message.chat.type == 'private':
-
-      answer = RequestSendler.SendMessageToServer(message=message.text)
+      
+      answer = RequestSendler.SendMessageToServer(message=message.text, userID=message.from_user.id)
       await message.answer(answer)
 
 
     elif "@PEIntensivBOT" in message.text:
-      answer = RequestSendler.SendMessageToServer(message=message.text)
+      answer = RequestSendler.SendMessageToServer(message=message.text, userID=message.from_user.id)
       await message.answer(answer)
        
     
